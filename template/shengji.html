@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>升级</title>
+<style type="text/css">
+body { -moz-user-select: none; -webkit-user-select: none; }
+body, div, span, a, cite, input, p { font-size: 14px; font-family: "Arial"; }
+body { padding: 10px; background-color: #eee; }
+h1 { text-align : center }
+#main { position: relative; width: 1200px; height: 600px; margin: 0px auto; border: 2px solid #33ee99; background: #333 url(  {{static_url("images/bg2.jpg")}}  ) no-repeat center; }
+
+#bar { position: absolute; bottom: 0px; width: 100%; height: 35px; border-top: 1px solid #33cc99; background-color: rgba(255, 255, 255, .4); }
+
+#bar span { display: inline-block; width: 80px; line-height: 35px; margin-left: 10px; float:right; }
+#bar cite { color: #ff3300; }
+/*
+#bar input { width: 85px; height: 35px; color: #006600; float: left; }
+*/
+#bar input { width: 85px; height: 35px;  float: left; }
+#whosTurn { text-align :center }
+.poker { position: absolute; width: 105px; height: 148px; border-radius: 4px; background: url( {{static_url("images/poker.png")}} ) no-repeat; cursor: default; }
+.poker:hover { box-shadow: 0px 0px 5px #0033cc; }
+.fixed:hover { box-shadow: none; }
+.drag_box { position: absolute; width: 105px; left: 0px; top: 0px; }
+
+
+
+#copyright { text-align: center; line-height: 200%; color: #666666; }
+</style>
+<script type="text/javascript" src="{{static_url("lib/jquery-1.8.0.min.js")}}"></script>
+<script type="text/javascript" src="{{static_url("lib/Spider.js")}}"></script>
+
+<script type="text/javascript">
+$(function() {
+    var playerId = {{pid}};
+    var playerName = "{{pname}}";
+	window.s = new Spider(playerId);
+	$("#playBtn").bind("click", function() {
+        s.start();
+        $('#playBtn').attr('disabled', true);
+    }); 
+	
+    $('#subBtn').bind("click", function(){
+        s.submit();
+    }
+    );
+
+    //$("#clearBtn").bind("click", function() {
+    //    s.clear();
+    //}); 
+
+    $("#spade").bind("click", function() {
+        s.bidHost(0);
+    }); 
+    
+    $("#heart").bind("click", function() {
+        s.bidHost(1);
+    }); 
+    
+    $("#club").bind("click", function() {
+        s.bidHost(2);
+    }); 
+    
+    $("#diamond").bind("click", function() {
+        s.bidHost(3);
+    }); 
+    
+    $("#NFF").bind("click", function() {
+        s.bidHost(4);
+    }); 
+});
+</script>
+
+</head>
+<body>
+<div id="main">
+    <h1> Player{{pid}} : {{pname}}</h1>
+    
+    <div id="host">
+    </div>
+	
+    <div id="poker">
+    </div>
+
+    <div id="bar">
+		<span>score:<cite id="score">0</cite></span>
+		<input id="playBtn" type="button" value="start" />
+		<input id="subBtn" type="button" value="submit" disabled="true" />
+		<input id="clearBtn" type="button" value="clear" />
+	</div>
+
+    <div id="bidHost">
+		<input id="spade" type="button" value = '黑桃'  >
+		<input id="heart" type="button" value="红桃" />
+		<input id="club" type="button" value="梅花" />
+		<input id="diamond" type="button" value="方片" />
+		<input id="NFF" type="button" value="无主" />
+	</div>
+    <p id=whosTurn > Who's turn? Player <span><span> </p> 
+    
+</div>
+<div id="copyright">@ Kun Huang</div>
+
+</body>
+</html>

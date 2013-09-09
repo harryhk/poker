@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>升级</title>
+<style type="text/css">
+body { padding: 10px; background-color: #eee; }
+h1 { padding: 20px; text-align: center; text-shadow: 2px 2px 7px #111111; }
+#main { position: relative; width: 1200px; height: 600px; margin: 0px auto; border: 2px solid #33ee99; background: #333 url(  {{static_url("images/bg2.jpg")}}  ) no-repeat center; }
+.login {padding: 10px; font-size: 130%; font-weight: bold}
+
+
+#copyright { text-align: center; line-height: 200%; color: #666666; }
+</style>
+<script type="text/javascript" src="{{static_url("lib/jquery-1.8.0.min.js")}}"></script>
+<script type="text/javascript" src="{{static_url("lib/Spider.js")}}"></script>
+
+
+
+</head>
+<body>
+<div id="main">
+    <h1> Welcom to kk 升级 </h1>
+    <h1> Log in </h1>
+    <form method="post" action='/login'>
+    <div id="bar"> 
+        {% for pid in range(4) %}
+            {% if player[pid]!='' %}
+                <p class=login> player{{pid}}: {{player[pid]}} </p>
+            {% else %}
+                <form action="/login" method = "post" >
+                <p class=login> player{{pid}}: <input type="text" name=playerName > <input type="submit" value="join"> 
+                <input type="hidden" name=playerId value={{pid}} /> </p>
+                </form>
+            {% end %}
+        {% end %}
+
+    </div>
+    </form>
+</div>
+<div id="copyright">@ Kun Huang</div>
+
+</body>
+</html>
